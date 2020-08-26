@@ -1,0 +1,46 @@
+<li class="list-group-item d-flex justify-content-between align-items-center">
+  <div class="custom-control custom-checkbox">
+    <input
+      type="checkbox"
+      class="custom-control-input"
+      id="{{tarea.id}}"
+      [checked]="tarea.estado"
+      (change)="cambiarEstado(tarea.id)"
+    >
+    <label for="{{tarea.id}}" class="custom-control-label" [ngClass]="{ 'tachar':tarea.estado, 'desmarcar': !tarea.estado }">{{ tarea.tarea }}</label>
+  </div>
+  <div>
+    <button type="button" class="btn btn-primary pill mr-1" (click)="fopenModal(tarea.id, editar)"><i class="fa fa-edit"></i></button>
+    <button type="button" class="btn btn-danger pill" (click)="eliminar(tarea.id)"><i class="fa fa-trash"></i></button>
+  </div>
+</li>
+<ng-template #editar let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Modificar Tarea</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <div  class="row mb-2">
+          <div class="col-12">
+            <label>Tarea</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="task.tarea"
+              name="tarea"
+              required
+            >
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="modal.dismiss()"><i class="fa fa-ban"></i> Cancelar</button>
+    <button type="button" class="btn btn-success" (click)="modificar()"><i class="fa fa-check"></i> Aceptar</button>
+  </div>
+</ng-template>

@@ -1,0 +1,22 @@
+<div class="input-group mb-2 mt-3">
+  <input type="text" name="tarea" [(ngModel)]="tarea"  class="form-control"/>
+  <div class="input-group-append">
+    <button class="btn btn-success" [disabled]="!tarea" type="button" (click)="agregar()"><i class="fa fa-plus"></i> Agregar</button>
+  </div>
+</div>
+<ul class="list-group">
+  <app-task-item (listar)="listar()" [tarea]="item" *ngFor="let item of tareas | completados:estado"></app-task-item>
+</ul>
+
+<ul class="list-group mt-2">
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    <div>
+      <button class="btn btn-sm btn-outline-success mr-1" (click)="estado = null">Todos <span class="badge badge-warning">{{ tareas ? tareas.length : '0' }}</span></button>
+      <button class="btn btn-sm btn-outline-secondary mr-1" (click)="estado = true">Completadas <span class="badge badge-success">{{ tareas | contador:true }}</span></button>
+      <button class="btn btn-sm btn-outline-secondary" (click)="estado = false">Incompletas <span class="badge badge-danger">{{ tareas | contador:false }}</span></button>
+    </div>
+    <div>
+      Total Tareas: <span class="badge badge-warning">{{ tareas ? tareas.length : '0' }}</span>
+    </div>
+  </li>
+</ul>
